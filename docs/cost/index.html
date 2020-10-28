@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <title>아파트 청약 비용 계산기</title>
+</head>
+<body>
+<div class="container mb-5">
+    <div id="app">
+        <div class="h2" style="text-align: center;">아파트 청약 비용 계산기</div>
+        <div class="small text-muted" style="text-align: center;">2020.10.22 이전 부동산 대책 반영</div>
+        <div class="row mt-5">
+            <div class="col">
+                <div class="form-check form-check-inline"><input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="buy" class="form-check-input">
+                    <label for="inlineRadio1" class="form-check-label">실입주</label></div>
+                <div class="form-check form-check-inline"><input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="rent" class="form-check-input">
+                    <label for="inlineRadio2" class="form-check-label">전세 내놓기</label></div>
+            </div>
+        </div>
+        <div class="row plan-input row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2">
+            <div class="col">
+                <div class="row mb-2" style="text-align: right;">
+                    <div class="col-4 plan-label">분양가</div>
+                    <div class="col-8">
+                        <div class="input-group"><input type="text" placeholder="분양가" aria-label="분양가" aria-describedby="by_addon" class="form-control">
+                            <div class="input-group-append"><span id="by_addon" class="input-group-text">원</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2" style="text-align: right;">
+                    <div class="col-4 plan-label">확장/옵션비</div>
+                    <div class="col-8">
+                        <div class="input-group"><input type="text" placeholder="옵션비" aria-label="옵션비" aria-describedby="opt_addon" class="form-control">
+                            <div class="input-group-append"><span id="opt_addon" class="input-group-text">원</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2" style="text-align: right;">
+                    <div class="col-4 plan-label">전용면적</div>
+                    <div class="col-8">
+                        <div data-toggle="buttons" class="btn-group btn-group-toggle" style="width: 100%;"><label class="btn btn-light active"><input
+                                type="radio" name="area_opt"> 전용 85㎡ 미만
+                        </label> <label class="btn btn-light"><input type="radio" name="area_opt"> 전용 85㎡ 초과
+                        </label></div>
+                    </div>
+                </div>
+                <div class="row mb-2" style="text-align: right;">
+                    <div class="col-4 plan-label">규제 여부</div>
+                    <div class="col-8">
+                        <div data-toggle="buttons" class="btn-group btn-group-toggle" style="width: 100%;"><label class="btn btn-light active"><input
+                                type="radio" name="restrict_opt"> 비조정지역
+                        </label> <label class="btn btn-light"><input type="radio" name="restrict_opt"> 조정지역
+                        </label> <label class="btn btn-light"><input type="radio" name="restrict_opt"> 투과지역
+                        </label></div>
+                    </div>
+                </div>
+                <div class="row mb-2" style="text-align: right;">
+                    <div class="col-4 plan-label">중도금 대출이자</div>
+                    <div class="col-8">
+                        <div class="input-group"><input type="text" placeholder="중도금 대출이자" aria-label="중도금 대출이자" aria-describedby="br_addon"
+                                                        class="form-control">
+                            <div class="input-group-append"><span id="br_addon" class="input-group-text">%</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2" style="text-align: right;">
+                    <div class="col-4 plan-label">주변 매매 시세</div>
+                    <div class="col-8">
+                        <div class="input-group"><input type="text" placeholder="주변 매매 시세" aria-label="주변 매매 시세" aria-describedby="ar_addon"
+                                                        class="form-control">
+                            <div class="input-group-append"><span id="ar_addon" class="input-group-text">원</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2" style="text-align: right; display: none;">
+                    <div class="col-4 plan-label">주변 전세 시세</div>
+                    <div class="col-8">
+                        <div class="input-group"><input type="text" placeholder="주변 전세 시세" aria-label="주변 전세 시세" aria-describedby="arr_addon"
+                                                        class="form-control">
+                            <div class="input-group-append"><span id="arr_addon" class="input-group-text">원</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row mb-2" style="text-align: right;">
+                    <div class="col-4 plan-label">계약금</div>
+                    <div class="col-8">
+                        <div data-toggle="buttons" class="btn-group btn-group-toggle" style="width: 100%;"><label class="btn btn-light active"><input
+                                type="radio" name="cont_rate"> 10%
+                        </label> <label class="btn btn-light"><input type="radio" name="cont_rate"> 20%
+                        </label></div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 plan-label" style="text-align: right;">입주예정일</div>
+                    <div class="col-8">
+                        <div class="input-group"><input type="text" class="d-picker form-control"></div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 plan-label" style="text-align: right;">회차당 납부 중도금</div>
+                    <div class="col-8">
+                        <div data-toggle="buttons" class="btn-group btn-group-toggle" style="width: 100%;"><label class="btn btn-light active"><input
+                                type="radio" name="mid_per"> 10%
+                        </label> <label class="btn btn-light"><input type="radio" name="mid_per"> 15%
+                        </label></div>
+                    </div>
+                </div>
+                <div class="row mb-2" style="text-align: right;">
+                    <div class="col-4 plan-label">중도금 1회차 납부일</div>
+                    <div class="col-8">
+                        <div>
+                            <div class="input-group"><input type="text" class="d-picker form-control">
+                                <div class="input-group-append">
+                                    <div class="input-group-text"><input type="checkbox" aria-label="self_paid" class="mr-1"> 자납
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2" style="text-align: right;">
+                    <div class="col-4 plan-label">중도금 2회차 납부일</div>
+                    <div class="col-8">
+                        <div>
+                            <div class="input-group"><input type="text" class="d-picker form-control">
+                                <div class="input-group-append">
+                                    <div class="input-group-text"><input type="checkbox" aria-label="self_paid" class="mr-1"> 자납
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2" style="text-align: right;">
+                    <div class="col-4 plan-label">중도금 3회차 납부일</div>
+                    <div class="col-8">
+                        <div>
+                            <div class="input-group"><input type="text" class="d-picker form-control">
+                                <div class="input-group-append">
+                                    <div class="input-group-text"><input type="checkbox" aria-label="self_paid" class="mr-1"> 자납
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2" style="text-align: right;">
+                    <div class="col-4 plan-label">중도금 4회차 납부일</div>
+                    <div class="col-8">
+                        <div>
+                            <div class="input-group"><input type="text" class="d-picker form-control">
+                                <div class="input-group-append">
+                                    <div class="input-group-text"><input type="checkbox" aria-label="self_paid" class="mr-1"> 자납
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2" style="text-align: right;">
+                    <div class="col-4 plan-label">중도금 5회차 납부일</div>
+                    <div class="col-8">
+                        <div>
+                            <div class="input-group"><input type="text" class="d-picker form-control">
+                                <div class="input-group-append">
+                                    <div class="input-group-text"><input type="checkbox" aria-label="self_paid" class="mr-1"> 자납
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2" style="text-align: right;">
+                    <div class="col-4 plan-label">중도금 6회차 납부일</div>
+                    <div class="col-8">
+                        <div>
+                            <div class="input-group"><input type="text" class="d-picker form-control">
+                                <div class="input-group-append">
+                                    <div class="input-group-text"><input type="checkbox" aria-label="self_paid" class="mr-1"> 자납
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" style="text-align: center;">
+                <button type="button" class="btn btn-primary btn-lg">계산하기</button>
+            </div>
+        </div>
+        <div class="result mb-5" >
+<!--        <div class="result mb-5" style="display: none;">-->
+            <div class="row justify-content-md-center" style="font-weight: bold;">
+                <div class="col-7 col-lg-4">계약 시 필요 금액</div>
+                <div class="col col-lg-4" style="text-align: right;">NaN <small>원</small></div>
+            </div>
+            <div class="row justify-content-md-center" style="font-weight: bold;">
+                <div class="col-7 col-lg-4">중도금 납부 시 필요 현금</div>
+                <div class="col col-lg-4" style="text-align: right;">NaN <small>원</small></div>
+            </div>
+            <div class="row justify-content-md-center mt-4" style="font-weight: bold;">
+                <div class="col-7 col-lg-4">입주 시 필요 금액</div>
+                <div class="col col-lg-4" style="text-align: right;">NaN <small>원</small></div>
+            </div>
+            <div class="row justify-content-md-center detail">
+                <div class="col-7 col-lg-4">- 잔금 (분양가, 옵션비, 확장비)</div>
+                <div class="col col-lg-4" style="text-align: right;">NaN <small>원</small></div>
+            </div>
+            <div class="row justify-content-md-center detail">
+                <div class="col-7 col-lg-4">- 취득세 (교육세, 농특세 포함)</div>
+                <div class="col col-lg-4" style="text-align: right;">NaN <small>원</small></div>
+            </div>
+            <div class="row justify-content-md-center detail">
+                <div class="col-7 col-lg-4">- 법무사 비용 (기본보수, 인지세, 증지세)</div>
+                <div class="col col-lg-4" style="text-align: right;">NaN <small>원</small></div>
+            </div>
+            <div class="row justify-content-md-center detail">
+                <div class="col-7 col-lg-4">- 중도금 대출 금액</div>
+                <div class="col col-lg-4" style="text-align: right;">NaN <small>원</small></div>
+            </div>
+            <div class="row justify-content-md-center detail">
+                <div class="col-7 col-lg-4">- 중도금 대출 이자 (후불제)</div>
+                <div class="col col-lg-4" style="text-align: right;">NaN <small>원</small></div>
+            </div>
+            <div class="row justify-content-md-center detail">
+                <div class="col-7 col-lg-4">- 입주 시점 예상 대출 금액</div>
+                <div class="col col-lg-4" style="text-align: right;">- NaN <small>원</small></div>
+            </div>
+            <div class="row justify-content-md-center detail" style="display: none;">
+                <div class="col-7 col-lg-4">- 전세 세입자 보증금</div>
+                <div class="col col-lg-4" style="text-align: right;">- NaN <small>원</small></div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-1iunpbk957fw3" data-ad-width="320" data-ad-height="100"></ins>
+        <script type="text/javascript" src="./temp_files/ba.min.js" async=""></script>
+    </div>
+
+    <div class="mt-5 mb-5">
+        <p class="text-danger" style="font-weight:bold;">
+            공지 사항
+        </p>
+        <ul>
+            <li>1가구 1주택자 기준입니다.</li>
+            <li>규제 지역에서 중도금 대출 시 입주 후 6개월 내 전입 의무가 있습니다.</li>
+            <li>법무사 비용에 주택 채권은 포함되어 있지 않습니다.</li>
+            <li>결과는 실제와 차이가 있을 수 있어 참고용으로만 활용하시고 좋은 청약되세요🍀🍀🍀</li>
+            <li>계산기는 크롬 브라우저에 최적화되어 있습니다.</li>
+        </ul>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<script src="./index.js"></script>
+
+</body>
+</html>
